@@ -1,2 +1,2 @@
 # maybe
-A tiny functional data structure for working with possibly missing values
+A tiny functional data structure for possibly undefined values
