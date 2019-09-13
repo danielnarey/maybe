@@ -1,19 +1,16 @@
 {
   "name": "@danielnarey/maybe",
   "version": "0.0.0",
-  "description": "A tiny functional data structure for possibly undefined values",
+  "description": "A tiny functional data structure for values that might not exist",
   "source": "index.js",
-  "main": "dist/index.js",
-  "umd:main": "dist/index.umd.js",
-  "unpkg": "dist/index.umd.js",
-  "module": "dist/index.modern.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "files": [
-    "index.js",
     "dist"
   ],
   "scripts": {
-    "build": "microbundle --target node",
-    "lint": "eslint --fix index.js",
+    "build": "rollup -c",
+    "lint": "eslint --fix index.js src",
     "release": "npm run lint && npm run build && np",
     "sync": "git pull && git add . && git commit -m 'automated sync' && git push",
     "test": "npm run lint && npm run build && ava",
@@ -43,8 +40,8 @@
     "eslint-plugin-ava": "^8.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-types": "^1.0.2",
-    "microbundle": "^0.12.0-next.6",
     "np": "^5.0.3",
+    "rollup": "^1.21.2",
     "updtr": "^3.1.0"
   },
   "publishConfig": {
