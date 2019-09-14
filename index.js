@@ -4,7 +4,7 @@ import map from './src/map';
 import nothing from './src/nothing';
 import toPromise from './src/to-promise';
 import toString from './src/to-string';
-import withDefault from './src/with-default
+import withDefault from './src/with-default';
 
 export default {
   of: _of,

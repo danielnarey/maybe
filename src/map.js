@@ -15,4 +15,4 @@ export default (
   const result = test(v) ? f(v) : undefined;
   
   return (g) => g(result);
-};
+});

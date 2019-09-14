@@ -7,7 +7,7 @@
  * test returns `true` for any value that is not `undefined` or `null`.
  */
 export default (
-  mb
+  mb,
   test = (x) => (x !== undefined && x !== null),
   err = new Error('Maybe not resolved: fvalue is missing or invalid'),
 ) => mb((v) => (
