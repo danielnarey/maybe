@@ -1,4 +1,8 @@
 const stringify = (s) => {
+  if (s === undefined || s === null) {
+    return 'nothing';
+  }; 
+
   if (typeof (s) === 'string') {
     return `"${s}"`;
   }

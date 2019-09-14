@@ -8,9 +8,9 @@ test('of', (t) => {
   t.is(maybe.toString(maybe.of('')), '(?"")');
   t.is(maybe.toString(maybe.of(0)), '(?0)');
   t.is(maybe.toString(maybe.of(NaN)), '(?NaN)');
-  t.is(maybe.toString(maybe.of(undefined)), '(?undefined)');
-  t.is(maybe.toString(maybe.of(null)), '(?undefined)');
-  t.is(maybe.toString(maybe.of()), '(?undefined)');
+  t.is(maybe.toString(maybe.of(undefined)), '(?nothing)');
+  t.is(maybe.toString(maybe.of(null)), '(?nothing)');
+  t.is(maybe.toString(maybe.of()), '(?nothing)');
 });
 
 
@@ -19,7 +19,7 @@ test('fromPromise', async (t) => {
   const reject = () => maybe.fromPromise(Promise.reject(new Error('!')));
   
   t.is(maybe.toString(await resolve()), '(?42)');
-  t.is(maybe.toString(await reject()), '(?undefined)');
+  t.is(maybe.toString(await reject()), '(?nothing)');
 });
 
 
@@ -31,8 +31,8 @@ test('map', (t) => {
 
 
 test('nothing', (t) => {
-  t.is(maybe.toString(maybe.nothing()), '(?undefined)');
-  t.is(maybe.toString(maybe.nothing(42)), '(?undefined)');
+  t.is(maybe.toString(maybe.nothing()), '(?nothing)');
+  t.is(maybe.toString(maybe.nothing(42)), '(?nothing)');
 });
 
 
@@ -73,6 +73,6 @@ test('toString', (t) => {
 test('withDefault', (t) => {
   t.is(maybe.withDefault(maybe.of(42), 0), 42);
   t.is(maybe.withDefault(maybe.of(42), 0, (x) => x < 10), 0);
-  t.is(maybe.withDefault(maybe.of(null), 0), 42);
+  t.is(maybe.withDefault(maybe.of(null), 0), 0);
   t.is(maybe.withDefault(maybe.nothing(), 0), 0);
 });
