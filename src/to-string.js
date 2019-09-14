@@ -1,12 +1,12 @@
 const stringify = (s) => {
-  if (typeof(s) === 'string') {
+  if (typeof (s) === 'string') {
     return `"${s}"`;
-  };
-  
+  }
+
   if (Array.isArray(s)) {
-    return `[${s}]` 
-  };
-  
+    return `[${s}]`;
+  }
+
   return `${s}`;
 };
 
