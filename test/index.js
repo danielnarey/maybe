@@ -1,5 +1,5 @@
 import test from 'ava';
-import maybe from '../dist/index';
+import maybe from '../dist/index.cjs';
 
 
 test('of', (t) => {
