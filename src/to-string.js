@@ -16,7 +16,7 @@ const stringify = (s) => {
 
 
 /**
- * ### `toString(mb) => '(?v)'
+ * ### `toString(mb) => '(?v)'`
  * Returns a string representing the contents of a **maybe**.
  */
 export default (mb) => mb((v) => `(?${stringify(v)})`);

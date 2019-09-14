@@ -1,4 +1,4 @@
-/* ### `nothing() => (?undefined)`
- * Construct a **maybe** that encloses nothing.
+/* ### `nothing() => (?nothing)`
+ * Returns a **maybe** that encloses nothing.
 */
 export default () => (f) => f();

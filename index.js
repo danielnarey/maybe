@@ -6,6 +6,7 @@ import toPromise from './src/to-promise';
 import toString from './src/to-string';
 import withDefault from './src/with-default';
 
+
 export default {
   of: _of,
   fromPromise,

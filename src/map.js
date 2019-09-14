@@ -1,5 +1,5 @@
 /**
- * ### `map(mb, f, [test]) => (?f(v))`
+ * ### `map(mb, f, [test]) => (?f(v)|nothing)`
  * Attempt to apply a function to a **maybe**. If passing the enclosed value
  * *v* of *mb* to *test* returns `true`, **map** applies *f* to *v* and
  * returns the result as a new **maybe**. If *test* returns `false`, **map**

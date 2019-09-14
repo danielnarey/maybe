@@ -2,7 +2,7 @@ import _of from './of';
 import nothing from './nothing';
 
 
-/* ### `fromPromise(p) => Promise<(?v)>`
+/* ### `fromPromise(p) => Promise<(?v|nothing)>`
  * Ensure that a promise won't reject by converting its awaited value to a
  * **maybe**. If *p* is a promise that resolves to *v*, awaiting
  * `fromPromise(p)` returns a **maybe** that encloses *v*. If *p* is a promise
