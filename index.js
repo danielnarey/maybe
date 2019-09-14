@@ -1,5 +1,17 @@
+import _of from './src/of';
+import fromPromise from './src/from-promise';
+import map from './src/map';
+import nothing from './src/nothing';
+import toPromise from './src/to-promise';
+import toString from './src/to-string';
+import withDefault from './src/with-default
+
 export default {
-  of: (v) => (o) => o(v),
-  withDefault: (m, d) => m((v) => v ? v : d),
-  toPromise: (m, e) => new Promise((res, rej) => v ? res(v) : rej(e)),
+  of: _of,
+  fromPromise,
+  map,
+  nothing,
+  toPromise,
+  toString,
+  withDefault,
 };

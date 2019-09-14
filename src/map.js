@@ -1,8 +1,9 @@
 /**
  * ### `map(mb, f, [test]) => (?f(v))`
- * If passing the enclosed value *v* of *mb* to *test* returns `true`, apply 
- * *f* to *v* and return the result as a new **maybe**. If *test* returns 
- * `false`, return a **maybe** with no value. If a test function is not 
+ * Attempt to apply a function to a **maybe**. If passing the enclosed value 
+ * *v* of *mb* to *test* returns `true`, **map** applies *f* to *v* and 
+ * returns the result as a new **maybe**. If *test* returns `false`, **map** 
+ * returns a **maybe** that encloses nothing. If a test function is not 
  * supplied, the default test returns `true` for any value that is not 
  * `undefined` or `null`.
  */

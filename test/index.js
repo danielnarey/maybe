@@ -1,100 +1,78 @@
 import test from 'ava';
-import pair from '../dist/index';
+import maybe from '../dist/index';
 
 
 test('of', (t) => {
-  t.true(pair.toString(pair.of('a', 1)) === '(a . 1)');
-  t.true(pair.toString(pair.of('a', 1, 'b')) === '(a . 1)');
-  t.true(pair.toString(pair.of('a')) === '(a . undefined)');
-  t.true(pair.toString(pair.of()) === '(undefined . undefined)');
+  t.is(maybe.toString(maybe.of(42)), '(?42)');
+  t.is(maybe.toString(maybe.of('apple')), '(?"apple")');
+  t.is(maybe.toString(maybe.of('')), '(?"")');
+  t.is(maybe.toString(maybe.of(0)), '(?0)');
+  t.is(maybe.toString(maybe.of(NaN)), '(?NaN)');
+  t.is(maybe.toString(maybe.of(undefined)), '(?undefined)');
+  t.is(maybe.toString(maybe.of(null)), '(?undefined)');
+  t.is(maybe.toString(maybe.of()), '(?undefined)');
 });
 
 
-test('from', (t) => {
-  t.true(pair.toString(pair.from(['a', 1])) === '(a . 1)');
-  t.true(pair.toString(pair.from(['a', 1, 'b'])) === '(a . 1)');
-  t.true(pair.toString(pair.from(['a'])) === '(a . undefined)');
-  t.true(pair.toString(pair.from([])) === '(undefined . undefined)');
-  t.throws(() => pair.from());
-});
-
-
-test('first', (t) => {
-  t.true(pair.first(pair.of('a', 1)) === 'a');
-  t.true(pair.first(pair.of()) === undefined);
-});
-
-
-test('second', (t) => {
-  t.true(pair.second(pair.of('a', 1)) === 1);
-  t.true(pair.second(pair.of('a')) === undefined);
-  t.true(pair.second(pair.of()) === undefined);
-});
-
-
-test('mapFirst', (t) => {
-  const mapped = pair.mapFirst(pair.of('a', 1), (s) => `${s}b`);
-
-  t.true(pair.toString(mapped) === '(ab . 1)');
-});
-
-
-test('mapSecond', (t) => {
-  const mapped = pair.mapSecond(pair.of('a', 1), (n) => n + 1);
-
-  t.true(pair.toString(mapped) === '(a . 2)');
-});
-
-
-test('mapEach', (t) => {
-  const mapped = pair.mapEach(pair.of('a', 1), (s) => `${s}b`, (n) => n + 1);
+test('fromPromise', async (t) => {
+  const resolve = () => maybe.fromPromise(Promise.resolve(42));
+  const reject = () => maybe.fromPromise(Promise.reject(new Error('!')));
   
-  t.true(pair.toString(mapped) === '(ab . 2)');
+  t.is(maybe.toString(await resolve()), '(?42)');
+  t.is(maybe.toString(await reject()), '(?undefined)');
 });
 
 
-test('mapBoth', (t) => {
-  const mapped = pair.mapBoth(pair.of('a', 1), (s) => `${s}b`);
+test('map', (t) => {
+  const mapped = maybe.map(maybe.of(42), (n) => n + 1);
+
+  t.is(maybe.toString(mapped), '(?43)');
+});
+
+
+test('nothing', (t) => {
+  t.is(maybe.toString(maybe.nothing()), '(?undefined)');
+  t.is(maybe.toString(maybe.nothing(42)), '(?undefined)');
+});
+
+
+test('toPromise', async (t) => {
+  const resolved = await maybe.toPromise(maybe.of(42));
   
-  t.true(pair.toString(mapped) === '(ab . 1b)');
-});
-
-
-test('reduce', (t) => {
-  const r1 = pair.reduce(pair.of('a', 1), (a, k) => `${a}${k}`, '!');
-  const r2 = pair.reduce(pair.of('a', 1), (a, k) => `${a}${k}`);
+  t.is(resolved, 42);
   
-  t.true(r1 === '!a1');
-  t.true(r2 === 'a1');
-});
-
-
-test('reduceRight', (t) => {
-  const r1 = pair.reduceRight(pair.of('a', 1), (a, k) => `${a}${k}`, '!');
-  const r2 = pair.reduceRight(pair.of('a', 1), (a, k) => `${a}${k}`);
+  const isNull = await t.throwsAsync(
+    maybe.toPromise(maybe.of(null), undefined, new Error('!')),
+  );
   
-  t.true(r1 === '!1a');
-  t.true(r2 === '1a');
-});
-
-
-test('reverse', (t) => {
-  const reversed = pair.reverse(pair.of('a', 1));
+  t.is(isNull.message, '!');
   
-  t.true(pair.toString(reversed) === '(1 . a)');
-});
-
-
-test('toArray', (t) => {
-  t.deepEqual(pair.toArray(pair.of('a', 1)), ['a', 1]);
-  t.throws(() => pair.toArray());
+  const failsTest = await t.throwsAsync(
+    maybe.toPromise(maybe.of(42), (x) => (x < 10), new Error('!')),
+  );
+  
+  t.is(failsTest.message, '!');
+  
+  const isNothing = await t.throwsAsync(
+    maybe.toPromise(maybe.nothing(), undefined, new Error('!')),
+  );
+  
+  t.is(isNothing.message, '!');
 });
 
 
 test('toString', (t) => {
-  t.true(pair.toString(pair.of('a', [])) === '(a . [])');
-  t.true(pair.toString(pair.of('a', [1])) === '(a . [1])');
-  t.true(pair.toString(pair.of('a', [1, 2])) === '(a . [1,2])');
-  t.true(pair.toString(pair.of('a', {})) === '(a . [object Object])');
-  t.throws(() => pair.toString());
+  t.is(maybe.toString(maybe.of([])), '(?[])');
+  t.is(maybe.toString(maybe.of([1])), '(?[1])');
+  t.is(maybe.toString(maybe.of([1, 2])), '(?[1,2])');
+  t.is(maybe.toString(maybe.of({})), '(?[object Object])');
+  t.throws(() => maybe.toString());
+});
+
+
+test('withDefault', (t) => {
+  t.is(maybe.withDefault(maybe.of(42), 0), 42);
+  t.is(maybe.withDefault(maybe.of(42), 0, (x) => x < 10), 0);
+  t.is(maybe.withDefault(maybe.of(null), 0), 42);
+  t.is(maybe.withDefault(maybe.nothing(), 0), 0);
 });
