@@ -10,6 +10,4 @@ export default (
   mb,
   test = (x) => (x !== undefined && x !== null),
   err = new Error('Maybe not resolved: fvalue is missing or invalid'),
-) => mb((v) => (
-  test(v) ? Promise.resolve(v) : Promise.reject(err);
-));
+) => mb((v) => test(v) ? Promise.resolve(v) : Promise.reject(err));

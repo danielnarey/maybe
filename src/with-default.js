@@ -11,6 +11,4 @@ export default (
   mb,
   d,
   test = (x) => (x !== undefined && x !== null),
-) => mb((v) => (
-  test(v) ? v : d
-));
+) => mb((v) => test(v) ? v : d);
