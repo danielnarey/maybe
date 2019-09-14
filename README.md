@@ -65,5 +65,5 @@ Returns a string representing the contents of a **maybe**.
 
 
 ## Prior Art
-Haskell: [Data.Maybe](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Maybe.html)
-Elm/core: [Maybe](https://package.elm-lang.org/packages/elm/core/latest/Maybe)
+- Haskell: [Data.Maybe](https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Maybe.html)
+- Elm/core: [Maybe](https://package.elm-lang.org/packages/elm/core/latest/Maybe)
