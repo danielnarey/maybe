@@ -1,6 +1,6 @@
 {
   "name": "@danielnarey/maybe",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A tiny functional data structure for values that might not exist",
   "source": "index.js",
   "main": "dist/index.cjs.js",
