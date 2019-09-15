@@ -2,7 +2,7 @@
 
 **A tiny functional data structure for values that might not exist**
 
-[intro]
+When you have a reference or function result that might not resolve to a value of the expected type or range, using a **maybe** simplifies error handling, helping to ensure predictable behavior from your application.
 
 
 ## Examples
