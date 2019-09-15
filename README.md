@@ -8,7 +8,27 @@ When you have a reference or function result that might not resolve to a value o
 ## Examples
 
 ```js
+import maybe from '@danielnarey/maybe';
+// OR: const maybe = require('@danielnarey/maybe');
 
+// constructor
+const mb = maybe.of('🤷‍♂️');
+typeof(mb); //--> 'function'
+
+// accessors
+maybe.withDefault(mb, '🙈'); //--> '🤷‍♂️'
+maybe.withDefault(maybe.nothing(), '🙈'); //--> '🙈'
+
+// conversion
+maybe.toPromise(mb).then(console.log); //--> '🤷‍♂️'
+maybe.toPromise(maybe.nothing()).catch(() => console.log('🙈')); //--> '🙈'
+
+// functional transforms
+const mb2 = maybe.map(mb, (s) => `🧜‍♀️${s}`);
+
+// immutability
+maybe.toString(mb); //--> '(?"🤷‍♂️")'
+maybe.toString(mb2); //--> '(?"🧜‍♀️🤷‍♂️")'
 
 ```
 
