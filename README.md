@@ -1,6 +1,11 @@
-# @danielnarey/maybe [![Build Status](https://travis-ci.com/danielnarey/maybe.svg?branch=master)](https://travis-ci.com/danielnarey/maybe) [![npm (scoped)](https://img.shields.io/npm/v/@danielnarey/maybe)](https://www.npmjs.com/package/@danielnarey/maybe) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@danielnarey/maybe)
+# @danielnarey/maybe
 
-**A tiny functional data structure for values that might not exist**
+**[Deprecated] A tiny functional data structure for values that might not exist**
+
+> **Deprecation Warning**: *This experimental library is no longer in active development and will not be updated in response to Node.js version  releases or security vulnerabilities identified in the dependency tree.*
+
+
+## Purpose
 
 When you have a reference or function result that might not resolve to a value of the expected type or range, using a **maybe** simplifies error handling, helping to ensure predictable behavior from your application.
 
