@@ -1,7 +1,7 @@
 {
   "name": "@danielnarey/maybe",
   "version": "0.1.0",
-  "description": "A tiny functional data structure for values that might not exist",
+  "description": "[Deprecated] A tiny functional data structure for values that might not exist",
   "source": "index.js",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -20,13 +20,6 @@
     "type": "git",
     "url": "https://github.com/danielnarey/maybe"
   },
-  "keywords": [
-    "maybe",
-    "immutable",
-    "functional",
-    "error",
-    "handling"
-  ],
   "author": "Daniel C. Narey",
   "license": "MIT",
   "engines": {
